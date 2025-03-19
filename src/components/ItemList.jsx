@@ -1,7 +1,12 @@
-import Item from "../components/Item";
+import { useState } from "react";
 import Pagination from "./Pagination";
 import CategorySidebar from "./CategorySideBar";
 import { useStore } from "../hooks/useStore";
+import ItemCard from "./ItemCard";
+import SortBy from "./SortBy";
+import Filters from "./Filters"; // Import Filters
+import { FiMenu } from "react-icons/fi";
+
 const ItemList = () => {
   const {
     items,
@@ -14,6 +19,8 @@ const ItemList = () => {
     itemsPerPage,
     setInputText,
   } = useStore();
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const displayedItems = items.slice(0, itemsPerPage);
@@ -30,29 +37,44 @@ const ItemList = () => {
     <div className="container mx-auto px-4 py-6 font-inter">
       <div className="flex flex-col md:flex-row md:space-x-6">
         <div className="w-full md:w-3/4 mb-6 md:mb-0">
-          <div className="flex justify-between items-center mb-4 p-4">
-            <h1 className="text-xl font-bold">Product List</h1>
-            <input
-              placeholder={"Search"}
-              className="border-gray-300 border rounded-md p-1 w-xl "
-              onChange={(e) => {
-                setInputText(e.target.value);
-              }}
-            />
+          <div className="flex justify-between  items-center mb-4 p-4">
+            <div className="flex justify-between items-center  md:hidden">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-gray-600 p-2"
+              >
+                <FiMenu className="w-[24px] h-[24px]" />
+              </button>
+            </div>
+
+            <div className="hidden sm:flex flex-row gap-4 flex-wrap">
+              <SortBy />
+              <input
+                placeholder={"Search"}
+                className="border-gray-300 border rounded-md w-40 p-2 m-0"
+                onChange={(e) => {
+                  setInputText(e.target.value);
+                }}
+              />
+            </div>
             <p className="text-gray-600 text-sm">
               Showing {startItem}-{endItem} of {totalItems}
             </p>
           </div>
-
+          {isMobileMenuOpen && (
+            <div className="p-4 md:hidden">
+              <Filters closeModal={() => setIsMobileMenuOpen(false)} />
+            </div>
+          )}
           {loading ? (
             <div className="flex justify-center py-8">
               <p>Loading products...</p>
             </div>
           ) : (
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-20">
               {displayedItems.map((product, index) => (
                 <li key={product.id || index}>
-                  <Item
+                  <ItemCard
                     id={product.id}
                     image={product.thumbnail}
                     title={product.title}
@@ -73,7 +95,9 @@ const ItemList = () => {
           </div>
         </div>
 
-        <CategorySidebar />
+        <div className="hidden md:block">
+          <CategorySidebar />
+        </div>
       </div>
     </div>
   );

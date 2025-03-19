@@ -9,12 +9,12 @@ const CategorySidebar = () => {
   } = useStore();
 
   return (
-    <div className="w-full md:w-1/4 pl-10">
-      <h2 className="text-lg font-bold mb-4">Categories</h2>
+    <div className="w-full text-accent font-inter font-light">
+      <h2 className="t mb-4">Categories</h2>
       {loadingCategories ? (
         <p>Loading categories...</p>
       ) : (
-        <form className="border-b border-gray-200">
+        <form className="border-b border-gray-200 ">
           {categories?.map((category, index) => (
             <div key={index} className="flex items-center mb-2">
               <input

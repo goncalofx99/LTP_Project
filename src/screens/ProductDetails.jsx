@@ -16,7 +16,7 @@ export default function ProductDetails() {
   ) : (
     <div>
       <img src={productDetails.thumbnail}></img>
-      <p>{ProductDetails.title}</p>
+      <p>{productDetails.title}</p>
       <p>{productDetails.price}</p>
       <p>{productDetails.description}</p>
     </div>

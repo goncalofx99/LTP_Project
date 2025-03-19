@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export default function Item(props) {
+export default function ItemCard(props) {
   const { image, title, price, id } = props;
   const navigate = useNavigate();
 
@@ -9,13 +9,13 @@ export default function Item(props) {
   }
 
   return (
-    <div onClick={handleClick}>
+    <div onClick={handleClick} className="font-inter font-light text-accent">
       <div>
-        <img src={image}></img>
+        <img src={image} className="w-m"></img>
       </div>
       <div>
         <p>{title}</p>
-        <p>{price}</p>
+        <p>${price}</p>
       </div>
     </div>
   );

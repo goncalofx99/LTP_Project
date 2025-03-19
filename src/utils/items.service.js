@@ -56,7 +56,20 @@ export async function getItemDetails(id) {
   }
 }
 
-export function sortItems(sortBy, order) {}
+export async function sortItems(sortBy, order) {
+  try {
+    const response = await fetch(
+      `https://dummyjson.com/products?sortBy=${sortBy}&order=${order}`
+    );
+
+    if (response) {
+      const data = await response.json();
+      return data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export async function searchItems(query) {
   try {

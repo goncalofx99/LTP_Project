@@ -4,6 +4,7 @@ import {
   getCategories,
   getItemsForCategory,
   searchItems,
+  sortItems,
 } from "../utils/items.service";
 import useFetch from "../hooks/useFetch";
 import { useEffect } from "react";
@@ -21,6 +22,7 @@ export const StoreProvider = ({ children }) => {
   const [page, setPage] = useState(1);
   const [itemsPerPage] = useState(9);
 
+  //get categories
   const {
     data: categoryData,
     loading: loadingCategories,
@@ -33,6 +35,7 @@ export const StoreProvider = ({ children }) => {
     }
   }, [categoryData]);
 
+  //get Items
   const {
     data: itemData,
     loading: loadingItems,
@@ -54,11 +57,14 @@ export const StoreProvider = ({ children }) => {
   const loadingState = loadingCategories || loadingItems;
   const errorState = categoryError || itemError;
 
-  //search Feature
-  const [inputText, setInputText] = useState("");
+  //search items
+  const [inputText, setInputText] = useState(undefined);
   const { data: searchItemsData } = useFetch(() => {
+    if (inputText === "") {
+      return { products: items, total: totalItems };
+    }
     if (inputText) return searchItems(inputText);
-    return { products: [], total: 0 }; // Fallback when inputText is empty
+    return { products: [], total: 0 };
   }, [inputText]);
 
   useEffect(() => {
@@ -67,6 +73,28 @@ export const StoreProvider = ({ children }) => {
       setTotalItems(searchItemsData.total || 0);
     }
   }, [searchItemsData]);
+
+  //sort items
+  const [sortBy, setSortBy] = useState(undefined);
+  const [order, setOrder] = useState("asc");
+
+  const { data: sortedItems } = useFetch(() => {
+    if (sortBy === "Sort by") {
+      getItems((page - 1) * itemsPerPage);
+    }
+
+    if (sortBy) {
+      return sortItems(sortBy, order);
+    }
+    return { products: [], total: 0 };
+  }, [sortBy, order]);
+
+  useEffect(() => {
+    if (sortedItems) {
+      setItems(sortedItems.products || []);
+      setTotalItems(sortedItems.total || 0);
+    }
+  }, [sortedItems]);
 
   const value = {
     items,
@@ -88,6 +116,14 @@ export const StoreProvider = ({ children }) => {
     inputText,
     setInputText: (text) => {
       setInputText(text);
+    },
+    sortBy,
+    setSortBy: (sort) => {
+      setSortBy(sort);
+    },
+    order,
+    setOrder: (text) => {
+      setOrder(text);
     },
   };
 
