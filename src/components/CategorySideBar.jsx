@@ -1,11 +1,12 @@
-import useFetch from "../hooks/useFetch";
-import { getCategories } from "../utils/items.service";
+import { useStore } from "../hooks/useStore";
 
-const CategorySidebar = ({ selectedCategory, onCategoryChange }) => {
-  const { data: categories, loading: loadingCategories } = useFetch(
-    getCategories,
-    []
-  );
+const CategorySidebar = () => {
+  const {
+    categories,
+    loadingCategories,
+    selectedCategory,
+    handleCategoryChange,
+  } = useStore();
 
   return (
     <div className="w-full md:w-1/4 pl-10">
@@ -22,7 +23,7 @@ const CategorySidebar = ({ selectedCategory, onCategoryChange }) => {
                 name="category"
                 className="squared-radio"
                 checked={selectedCategory === category}
-                onChange={() => onCategoryChange(category)}
+                onChange={() => handleCategoryChange(category)}
               />
               <label htmlFor={`category-${index}`}>{category}</label>
             </div>

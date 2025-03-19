@@ -43,8 +43,32 @@ export async function getItemsForCategory(category) {
   }
 }
 
-export function getItemDetails(id) {}
+export async function getItemDetails(id) {
+  try {
+    const response = await fetch(`https://dummyjson.com/products/${id}`);
+
+    if (response) {
+      const data = await response.json();
+      return data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export function sortItems(sortBy, order) {}
 
-export function searchItems(querry) {}
+export async function searchItems(query) {
+  try {
+    const response = await fetch(
+      `https://dummyjson.com/products/search?q=${query}`
+    );
+
+    if (response) {
+      const data = await response.json();
+      return data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}

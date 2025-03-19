@@ -1,6 +1,7 @@
 import { IoIosSearch } from "react-icons/io";
 import { FiUser } from "react-icons/fi";
 import { FiShoppingBag } from "react-icons/fi";
+import { NavLink } from "react-router";
 export default function MainNavigation() {
   const options = ["Home", "Shop", "About", "Contact", "Blog"];
 
@@ -9,9 +10,11 @@ export default function MainNavigation() {
       <nav className="flex justify-around items-center  mx-auto">
         {/* Left-aligned Title */}
         <div className="text-left">
-          <h1 className="font-title text-[32px]  leading-[100%] tracking-[6%] cursor-pointer ">
-            THE ONLINE STORE
-          </h1>
+          <NavLink to="/">
+            <h1 className="font-title text-[32px]  leading-[100%] tracking-[6%] cursor-pointer">
+              THE ONLINE STORE
+            </h1>
+          </NavLink>
         </div>
 
         {/* Centered Navigation */}
