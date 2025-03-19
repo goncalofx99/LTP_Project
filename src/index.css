@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+  --font-title: "Bebas Neue", "sans-serif";
+  --font-roboto: "Roboto", "sans-serif";
+  --font-ubuntu: "Ubuntu", "sans-serif";
+  --font-inter: "Inter", "sans-serif";
+
+  --color-accent: #1f3044;
+}
