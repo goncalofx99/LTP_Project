@@ -34,7 +34,7 @@ const ItemList = () => {
   };
 
   return (
-    <div className="container font-inter font-bold">
+    <div className="container font-inter font-bold mb-10">
       <div className="flex flex-col justify-between md:flex-row md:space-x-6">
         <div className="w-full md:w-3/4 mb-6 md:mb-0">
           <div className="flex sm:justify-between justify-around  items-center my-5 ">
