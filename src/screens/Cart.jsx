@@ -7,7 +7,7 @@ export default function Cart() {
   const { cart } = useContext(CartContext);
 
   return (
-    <div className="flex md:flex-row flex-col-reverse justify-between mt-10 px-10">
+    <div className="flex md:flex-row flex-col-reverse justify-between">
       {cart.length === 0 ? (
         <div className="w-1/2 mx-auto my-auto">
           <h1 className="text-center">No items in your Cart</h1>

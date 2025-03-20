@@ -5,7 +5,7 @@ export function RootLayout() {
   return (
     <>
       <MainNavigation />
-      <main>
+      <main className="mt-10 mx-20">
         <Outlet />
       </main>
     </>

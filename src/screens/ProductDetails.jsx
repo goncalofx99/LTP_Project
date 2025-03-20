@@ -40,7 +40,7 @@ export default function ProductDetails() {
     </div>
   ) : (
     <div>
-      <div className="mt-10 ml-20 ">
+      <div className="">
         <IoIosArrowBack
           className="w-[24px] h-[24px] cursor-pointer"
           onClick={goBack}

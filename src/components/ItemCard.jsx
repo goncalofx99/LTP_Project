@@ -9,9 +9,9 @@ export default function ItemCard(props) {
   }
 
   return (
-    <div onClick={handleClick} className="font-inter font-light text-accent">
+    <div onClick={handleClick} className="font-inter font-bold text-accent">
       <div>
-        <img src={image} className="w-m"></img>
+        <img src={image} className=""></img>
       </div>
       <div>
         <p>{title}</p>

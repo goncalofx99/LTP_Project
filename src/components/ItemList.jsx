@@ -34,10 +34,10 @@ const ItemList = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6 font-inter">
-      <div className="flex flex-col md:flex-row md:space-x-6">
+    <div className="container font-inter font-bold">
+      <div className="flex flex-col justify-between md:flex-row md:space-x-6">
         <div className="w-full md:w-3/4 mb-6 md:mb-0">
-          <div className="flex justify-between  items-center mb-4 p-4">
+          <div className="flex justify-between  items-center">
             <div className="flex justify-between items-center  md:hidden">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -71,7 +71,7 @@ const ItemList = () => {
               <p>Loading products...</p>
             </div>
           ) : (
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-20">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20">
               {displayedItems.map((product, index) => (
                 <li key={product.id || index}>
                   <ItemCard
