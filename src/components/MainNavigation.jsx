@@ -2,17 +2,18 @@ import { IoIosSearch } from "react-icons/io";
 import { FiUser } from "react-icons/fi";
 import { FiShoppingBag } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import { FiMenu } from "react-icons/fi"; // Menu icon for mobile
+import { useContext, useState } from "react";
+import { FiMenu } from "react-icons/fi";
+import { CartContext } from "../context/CartContext";
 
 export default function MainNavigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const options = ["Home", "Shop", "About", "Contact", "Blog"];
+  const { cart } = useContext(CartContext);
 
   return (
-    <header className="p-4 border-b max-h-screen border-accent text-accent">
+    <header className="px-20 py-4 border-b max-h-screen border-accent text-accent">
       <nav className="flex justify-between items-center mx-auto">
-        {/* Left-aligned Title */}
         <div className="text-left">
           <NavLink to="/">
             <h1 className="font-title text-[32px] leading-[100%] tracking-[6%] cursor-pointer">
@@ -21,7 +22,6 @@ export default function MainNavigation() {
           </NavLink>
         </div>
 
-        {/* Hamburger icon (mobile only) */}
         <div className="lg:hidden">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -31,9 +31,8 @@ export default function MainNavigation() {
           </button>
         </div>
 
-        {/* Centered Navigation (Desktop) */}
         <ul
-          className={`lg:flex space-x-6 transition-all duration-300 justify-center ${
+          className={`lg:flex space-x-6 gap-4 transition-all duration-300 justify-center ${
             isMenuOpen
               ? "flex flex-col items-center absolute bg-white w-full top-16 left-0"
               : "hidden"
@@ -42,25 +41,33 @@ export default function MainNavigation() {
           {options.map((option, index) => (
             <li
               key={index}
-              className="text-lg cursor-pointer font-inter font-light p-2"
+              className="text-lg cursor-pointer font-inter font-bold text-accent p-2"
             >
-              <NavLink to={`/${option.toLowerCase()}`}>{option}</NavLink>
+              {option}
             </li>
           ))}
 
-          {/* Icons for mobile menu */}
           <div className="flex gap-8 pb-5 flex-row items-center lg:hidden mt-4">
             <IoIosSearch className="w-[18px] h-[18px] cursor-pointer text-accent" />
             <FiUser className="w-[18px] h-[18px] cursor-pointer text-accent" />
-            <FiShoppingBag className="w-[18px] h-[18px] cursor-pointer text-accent" />
+            <NavLink to="/cart">
+              {" "}
+              <FiShoppingBag className="w-[18px] h-[18px] cursor-pointer text-accent" />
+            </NavLink>
           </div>
         </ul>
 
-        {/* Right-aligned Icons (Desktop) */}
         <div className="hidden lg:flex gap-8">
-          <IoIosSearch className="w-[18px] h-[18px] cursor-pointer text-accent" />
-          <FiUser className="w-[18px] h-[18px] cursor-pointer text-accent" />
-          <FiShoppingBag className="w-[18px] h-[18px] cursor-pointer text-accent" />
+          <IoIosSearch className="w-[22px] h-[22px] cursor-pointer text-accent" />
+          <FiUser className="w-[22px] h-[22px] cursor-pointer text-accent" />
+          <NavLink to="/cart">
+            <FiShoppingBag className="w-[22px] h-[22px] cursor-pointer text-accent" />
+            {cart.length > 0 ? (
+              <div className="absolute top-[35px] right-[65px]  bg-accent text-white py-1 px-2 rounded-full text-xs">
+                <p>{cart.length}</p>
+              </div>
+            ) : null}
+          </NavLink>
         </div>
       </nav>
     </header>

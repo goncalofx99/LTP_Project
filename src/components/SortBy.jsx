@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useStore } from "../hooks/useStore";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+
 export default function SortBy() {
   const { sortBy, setSortBy, order, setOrder } = useStore();
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +30,7 @@ export default function SortBy() {
         {sortBy && sortBy !== "Sort by"
           ? `${sortBy} ${order === "asc" ? "↑" : "↓"}`
           : "Sort by"}
-        <span>{isOpen ? "∨" : "∧"}</span>
+        <span>{isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}</span>
       </button>
 
       {isOpen && (
