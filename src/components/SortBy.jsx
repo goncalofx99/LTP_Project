@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useStore } from "../hooks/useStore";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useContext } from "react";
+import { StoreContext } from "../context/StoreContext";
 
 export default function SortBy() {
-  const { sortBy, setSortBy, order, setOrder } = useStore();
+  const { sortBy, setSortBy, order, setOrder } = useContext(StoreContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const sortOptions = ["Sort by", "price", "name", "rating"];

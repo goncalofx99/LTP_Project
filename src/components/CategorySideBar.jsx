@@ -1,4 +1,5 @@
-import { useStore } from "../hooks/useStore";
+import { useContext } from "react";
+import { StoreContext } from "../context/StoreContext";
 
 const CategorySidebar = () => {
   const {
@@ -6,7 +7,7 @@ const CategorySidebar = () => {
     loadingCategories,
     selectedCategory,
     handleCategoryChange,
-  } = useStore();
+  } = useContext(StoreContext);
 
   return (
     <div className="w-full text-accent font-inter font-bold">

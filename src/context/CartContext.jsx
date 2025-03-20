@@ -19,9 +19,46 @@ export const CartProvider = ({ children }) => {
     sendCart(cart);
   }, [cart]);
 
+  // New cart management functions
+  const addToCart = (product, quantity = 1) => {
+    const existingItem = cart.find((item) => item.product.id === product.id);
+
+    if (existingItem) {
+      setCart(
+        cart.map((item) =>
+          item.product.id === product.id
+            ? { ...item, qty: item.qty + quantity }
+            : item
+        )
+      );
+    } else {
+      setCart([...cart, { product, qty: quantity }]);
+    }
+  };
+
+  const removeFromCart = (productId) => {
+    setCart(cart.filter((item) => item.product.id !== productId));
+  };
+
+  const updateQuantity = (productId, newQuantity) => {
+    if (newQuantity <= 0) {
+      removeFromCart(productId);
+      return;
+    }
+
+    setCart(
+      cart.map((item) =>
+        item.product.id === productId ? { ...item, qty: newQuantity } : item
+      )
+    );
+  };
+
   const value = {
     cart,
     setCart,
+    addToCart,
+    removeFromCart,
+    updateQuantity,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

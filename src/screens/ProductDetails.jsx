@@ -7,11 +7,12 @@ import { CartContext } from "../context/CartContext";
 
 import { useContext } from "react";
 export default function ProductDetails() {
-  const { cart, setCart } = useContext(CartContext);
-
+  const { cart, addToCart } = useContext(CartContext);
   const params = useParams();
   const id = params.id;
   const navigate = useNavigate();
+
+  // Find if product is already in cart
   const cartItem = cart.find((item) => item.product.id == id);
 
   const { data: productDetails, loading: loadingCategories } = useFetch(() =>
@@ -22,16 +23,8 @@ export default function ProductDetails() {
     navigate("/");
   };
 
-  const addToCart = () => {
-    if (cartItem) {
-      const updatedCart = cart.map((item) =>
-        item.product.id == id ? { ...item, qty: item.qty + 1 } : item
-      );
-      setCart(updatedCart);
-    } else {
-      const newItem = { product: productDetails, qty: 1 };
-      setCart([...cart, newItem]);
-    }
+  const handleAddToCart = () => {
+    addToCart(productDetails);
   };
 
   return loadingCategories ? (
@@ -62,7 +55,7 @@ export default function ProductDetails() {
 
           <button
             className="bg-accent w-full p-2 text-white font-roboto-mono text-base font-light"
-            onClick={addToCart}
+            onClick={handleAddToCart}
           >
             {cartItem ? `In cart (${cartItem.qty})` : "Add to Cart"}
           </button>

@@ -12,7 +12,7 @@ export default function CartSummary() {
     totalPrice == 0 ? 0 : Math.round(Math.random() * 20 * 100) / 100;
 
   return (
-    <div className="border border-accent rounded-3xl p-6 w-full font-ubuntu  ">
+    <div className="border border-accent rounded-3xl p-6 w-full font-ubuntu  text-accent ">
       <div>
         <h1 className="text-xl font-semibold mb-5">Cart Summary</h1>
       </div>

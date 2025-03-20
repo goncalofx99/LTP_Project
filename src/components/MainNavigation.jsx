@@ -12,7 +12,7 @@ export default function MainNavigation() {
   const { cart } = useContext(CartContext);
 
   return (
-    <header className="px-20 py-4 border-b max-h-screen border-accent text-accent">
+    <header className="sm:px-20 px-5 py-4 border-b max-h-screen border-accent text-accent">
       <nav className="flex justify-between items-center mx-auto">
         <div className="text-left">
           <NavLink to="/">

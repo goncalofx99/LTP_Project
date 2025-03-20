@@ -1,12 +1,13 @@
-import { useStore } from "../hooks/useStore";
 import CategorySidebar from "./CategorySideBar";
 import SortBy from "./SortBy";
+import { useContext } from "react";
+import { StoreContext } from "../context/StoreContext";
 
 export default function Filters({ closeModal }) {
-  const { setInputText } = useStore();
+  const { setInputText } = useContext(StoreContext);
 
   return (
-    <div className="relative">
+    <div className="relative ">
       <div className="h-150 flex flex-col items-center bg-white border-accent border-b w-full top-16 left-0 overflow-y-auto pb-20">
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-4">

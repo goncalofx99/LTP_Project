@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Pagination from "./Pagination";
 import CategorySidebar from "./CategorySideBar";
-import { useStore } from "../hooks/useStore";
 import ItemCard from "./ItemCard";
 import SortBy from "./SortBy";
 import Filters from "./Filters"; // Import Filters
 import { FiMenu } from "react-icons/fi";
-
+import { useContext } from "react";
+import { StoreContext } from "../context/StoreContext";
 const ItemList = () => {
   const {
     items,
@@ -18,7 +18,7 @@ const ItemList = () => {
     handlePageChange,
     itemsPerPage,
     setInputText,
-  } = useStore();
+  } = useContext(StoreContext);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -37,7 +37,7 @@ const ItemList = () => {
     <div className="container font-inter font-bold">
       <div className="flex flex-col justify-between md:flex-row md:space-x-6">
         <div className="w-full md:w-3/4 mb-6 md:mb-0">
-          <div className="flex justify-between  items-center">
+          <div className="flex sm:justify-between justify-around  items-center my-5 ">
             <div className="flex justify-between items-center  md:hidden">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -71,7 +71,7 @@ const ItemList = () => {
               <p>Loading products...</p>
             </div>
           ) : (
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 ml-10">
               {displayedItems.map((product, index) => (
                 <li key={product.id || index}>
                   <ItemCard
