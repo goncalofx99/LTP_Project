@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
     sendCart(cart);
   }, [cart]);
 
-  // New cart management functions
+  // cart  functions
   const addToCart = (product, quantity = 1) => {
     const existingItem = cart.find((item) => item.product.id === product.id);
 
