@@ -5,7 +5,6 @@ import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { getItemDetails } from "../utils/items.service";
 
-// Define TypeScript interface for product
 interface Product {
   id: number;
   title: string;
@@ -37,7 +36,6 @@ export default function ProductDetails() {
   const { cart, addToCart } = useContext(CartContext);
   const navigate = useNavigate();
 
-  // Find if product is already in cart
   const cartItem = cart.find((item) => item.product.id == product.id);
 
   const goBack = () => {

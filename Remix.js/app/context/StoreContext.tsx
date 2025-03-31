@@ -13,7 +13,6 @@ import {
   sortItems,
 } from "../utils/items.service";
 
-// Define TypeScript interfaces
 export interface Product {
   id: number;
   title: string;
@@ -150,7 +149,6 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
       try {
         setLoadingItems(true);
         if (inputText === "") {
-          // Reset to default items if search is cleared
           const data = await getItems((page - 1) * itemsPerPage);
           if (data) {
             setItems(data.products || []);
